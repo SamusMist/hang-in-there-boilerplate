@@ -3,10 +3,11 @@ var posterTitle = document.querySelector('.poster-title');
 var posterQuote = document.querySelector('.poster-quote');
 var posterImage = document.querySelector('.poster-img');
 var buttonShowRandom = document.querySelector('.show-random');
-var posterForm = document.querySelector('.poster-form')
-var buttonMakePoster = document.querySelector('.show-form')
-var mainFrame = document.querySelector('.main-poster')
-
+var posterForm = document.querySelector('.poster-form');
+var buttonMakePoster = document.querySelector('.show-form');
+var mainFrame = document.querySelector('.main-poster');
+var buttonSavePoster = document.querySelector('.show-saved');
+var postersSaved = document.querySelector('.saved-posters');
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -111,6 +112,7 @@ var currentPoster;
 // event listeners go here 👇
 buttonShowRandom.addEventListener('click', everChangingPoster);
 buttonMakePoster.addEventListener('click', getForm);
+buttonSavePoster.addEventListener('click', showSavedPosters);
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 
@@ -122,10 +124,9 @@ posterImage.src = images[getRandomIndex(images)];
 posterTitle.innerText = titles[getRandomIndex(titles)];
 posterQuote.innerText = quotes[getRandomIndex(quotes)];
 };
+everChangingPoster();
 
 function getForm() {
-mainFrame.classList.toggle('hidden')
-posterForm.classList.toggle('hidden')
-}
-
-everChangingPoster();
+mainFrame.classList.toggle('hidden');
+posterForm.classList.toggle('hidden');
+};
