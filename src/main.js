@@ -8,7 +8,8 @@ var buttonMakePoster = document.querySelector('.show-form');
 var mainFrame = document.querySelector('.main-poster');
 var buttonSavePoster = document.querySelector('.show-saved');
 var postersSaved = document.querySelector('.saved-posters');
-var buttonBackToMain = document.querySelector('.back-to-main')
+var buttonBackToMain = document.querySelector('.back-to-main');
+var buttonShowMain = document.querySelector('.show-main');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -113,9 +114,10 @@ var currentPoster;
 
 // event listeners go here 👇
 buttonShowRandom.addEventListener('click', everChangingPoster);
-buttonMakePoster.addEventListener('click', getForm);
+buttonMakePoster.addEventListener('click', makePosterForm);
 buttonSavePoster.addEventListener('click', showSavedPosters);
-buttonBackToMain.addEventListener('click', showSavedPosters)
+buttonBackToMain.addEventListener('click', showSavedPosters);
+buttonShowMain.addEventListener('click', makePosterForm);
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 
@@ -129,7 +131,7 @@ posterQuote.innerText = quotes[getRandomIndex(quotes)];
 };
 everChangingPoster();
 
-function getForm() {
+function makePosterForm() {
 mainFrame.classList.toggle('hidden');
 posterForm.classList.toggle('hidden');
 };
