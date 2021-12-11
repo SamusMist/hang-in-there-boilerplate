@@ -8,6 +8,8 @@ var buttonMakePoster = document.querySelector('.show-form');
 var mainFrame = document.querySelector('.main-poster');
 var buttonSavePoster = document.querySelector('.show-saved');
 var postersSaved = document.querySelector('.saved-posters');
+var buttonBackToMain = document.querySelector('.back-to-main')
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -113,6 +115,7 @@ var currentPoster;
 buttonShowRandom.addEventListener('click', everChangingPoster);
 buttonMakePoster.addEventListener('click', getForm);
 buttonSavePoster.addEventListener('click', showSavedPosters);
+buttonBackToMain.addEventListener('click', showSavedPosters)
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 
