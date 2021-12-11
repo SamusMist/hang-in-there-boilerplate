@@ -1,15 +1,23 @@
 // query selector variables go here 👇
+var mainFrame = document.querySelector('.main-poster');
+//Variables for main page
 var posterTitle = document.querySelector('.poster-title');
 var posterQuote = document.querySelector('.poster-quote');
 var posterImage = document.querySelector('.poster-img');
 var buttonShowRandom = document.querySelector('.show-random');
-var posterForm = document.querySelector('.poster-form');
-var buttonMakePoster = document.querySelector('.show-form');
-var mainFrame = document.querySelector('.main-poster');
 var buttonSavePoster = document.querySelector('.show-saved');
+var buttonMakePoster = document.querySelector('.show-form');
+//Variables for saved poster page
 var postersSaved = document.querySelector('.saved-posters');
 var buttonBackToMain = document.querySelector('.back-to-main');
+//Variables for make poster page
+var posterForm = document.querySelector('.poster-form');
 var buttonShowMain = document.querySelector('.show-main');
+var buttonShowMyPoster = document.querySelector('.make-poster');
+//Variables for make your own poster page
+var createPosterTitle = document.querySelector('#poster-title');
+var createPosterImg = document.querySelector('#poster-image-url');
+var createPosterQuote = document.querySelector('#poster-quote');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -113,11 +121,13 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
+
 buttonShowRandom.addEventListener('click', everChangingPoster);
 buttonMakePoster.addEventListener('click', makePosterForm);
 buttonSavePoster.addEventListener('click', showSavedPosters);
 buttonBackToMain.addEventListener('click', showSavedPosters);
 buttonShowMain.addEventListener('click', makePosterForm);
+buttonShowMyPoster.addEventListener('click', showMyPoster);
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 
@@ -139,4 +149,12 @@ posterForm.classList.toggle('hidden');
 function showSavedPosters() {
   postersSaved.classList.toggle('hidden');
   mainFrame.classList.toggle('hidden');
+};
+
+function showMyPoster() {
+  event.preventDefault();
+  posterImage.src = createPosterImg.value;
+  posterQuote.innerText = createPosterQuote.value;
+  posterTitle.innerText = createPosterTitle.value;
+  makePosterForm();
 };
