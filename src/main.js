@@ -154,6 +154,7 @@ function showSavedPosters() {
 function showMyPoster() {
   event.preventDefault();
   posterImage.src = createPosterImg.value;
+  posterQuote.innerText = createPosterQuote.value;
   makePosterForm();
 };
 
