@@ -155,16 +155,6 @@ function showMyPoster() {
   event.preventDefault();
   posterImage.src = createPosterImg.value;
   posterQuote.innerText = createPosterQuote.value;
+  posterTitle.innerText = createPosterTitle.value;
   makePosterForm();
 };
-
-// currentPoster = new Poster(createPosterImg.value, createPosterTitle.value, createPosterQuote.value)
-
-// var input = document.querySelector('input');
-// var log = document.getElementById('');
-//
-// input.addEventListener('input', updateValue);
-//
-// function updateValue(e) {
-  //   log.textContent = e.target.value;
-  // }
