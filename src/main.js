@@ -1,8 +1,12 @@
 // query selector variables go here 👇
-var openingTitle = document.querySelector('.poster-title');
-var openingQuote = document.querySelector('.poster-quote');
-var openingImage = document.querySelector('.poster-img');
-var showRandomButton = document.querySelector('.show-random');
+var posterTitle = document.querySelector('.poster-title');
+var posterQuote = document.querySelector('.poster-quote');
+var posterImage = document.querySelector('.poster-img');
+var buttonShowRandom = document.querySelector('.show-random');
+var posterForm = document.querySelector('.poster-form')
+var buttonMakePoster = document.querySelector('.show-form')
+var mainFrame = document.querySelector('.main-poster')
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -105,16 +109,23 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
-showRandomButton.addEventListener('click', everChangingPoster);
+buttonShowRandom.addEventListener('click', everChangingPoster);
+buttonMakePoster.addEventListener('click', getForm);
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 function everChangingPoster() {
-openingImage.src = images[getRandomIndex(images)];
-openingTitle.innerText = titles[getRandomIndex(titles)];
-openingQuote.innerText = quotes[getRandomIndex(quotes)];
+posterImage.src = images[getRandomIndex(images)];
+posterTitle.innerText = titles[getRandomIndex(titles)];
+posterQuote.innerText = quotes[getRandomIndex(quotes)];
 };
+
+function getForm() {
+mainFrame.classList.toggle('hidden')
+posterForm.classList.toggle('hidden')
+}
 
 everChangingPoster();
