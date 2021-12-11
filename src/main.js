@@ -130,3 +130,8 @@ function getForm() {
 mainFrame.classList.toggle('hidden');
 posterForm.classList.toggle('hidden');
 };
+
+function showSavedPosters() {
+  postersSaved.classList.toggle('hidden');
+  mainFrame.classList.toggle('hidden');
+};
