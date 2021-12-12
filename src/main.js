@@ -134,10 +134,7 @@ buttonBackToMain.addEventListener('click', showSavedPosters);
 buttonShowRandom.addEventListener('click', randomizedPoster);
 //Button to show user created poster when clicked
 buttonShowMyPoster.addEventListener('click', showMyPoster);
-//Button that should save poster
-//and add to saved posters Page
-//but doesnt
-//and I dont fucking know why
+//Button to save, and add saved posters to saved posters page
 buttonSaveThisPoster.addEventListener('click', function() {
   saveThisPoster();
   addSavedToGrid();
@@ -196,9 +193,9 @@ function addSavedToGrid() {
   for (var i = 0; i < savedPosters.length; i++) {
     savedPostersGrid.innerHTML += `
     <article class='mini-poster'>
-    <img class="poster-img" src=${savedPosters[i].imageURL}>
-    <h2 class="poster-title">${savedPosters[i].title}</h2>
-    <h4 class="poster-quote">${savedPosters[i].quote}</h4>
+      <img class="poster-img" src=${savedPosters[i].imageURL}>
+      <h2 class="poster-title">${savedPosters[i].title}</h2>
+      <h4 class="poster-quote">${savedPosters[i].quote}</h4>
     </article>`
   };
 };
