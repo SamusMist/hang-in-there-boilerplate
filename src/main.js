@@ -1,14 +1,17 @@
 // query selector variables go here 👇
 var mainFrame = document.querySelector('.main-poster');
-//Variables for main page
+//Variables to access poster values on main page
 var posterTitle = document.querySelector('.poster-title');
 var posterQuote = document.querySelector('.poster-quote');
 var posterImage = document.querySelector('.poster-img');
+//Variables for main page buttons
 var buttonShowRandom = document.querySelector('.show-random');
-var buttonSavePoster = document.querySelector('.show-saved');
+var buttonShowSavedPoster = document.querySelector('.show-saved');
 var buttonMakePoster = document.querySelector('.show-form');
+var buttonSaveThisPoster = document.querySelector('.save-poster');
 //Variables for saved poster page
 var postersSaved = document.querySelector('.saved-posters');
+var savedPostersGrid = document.querySelector('.saved-posters-grid');
 var buttonBackToMain = document.querySelector('.back-to-main');
 //Variables for make poster page
 var posterForm = document.querySelector('.poster-form');
@@ -121,36 +124,55 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
-
-buttonShowRandom.addEventListener('click', everChangingPoster);
+//Buttons to toggle between make poster form and main page
 buttonMakePoster.addEventListener('click', makePosterForm);
-buttonSavePoster.addEventListener('click', showSavedPosters);
-buttonBackToMain.addEventListener('click', showSavedPosters);
 buttonShowMain.addEventListener('click', makePosterForm);
+//Buttons to toggle between saved posters page and main page
+buttonShowSavedPoster.addEventListener('click', showSavedPosters);
+buttonBackToMain.addEventListener('click', showSavedPosters);
+//Button to show a random poster on main when clicked
+buttonShowRandom.addEventListener('click', randomizedPoster);
+//Button to show user created poster when clicked
 buttonShowMyPoster.addEventListener('click', showMyPoster);
+//Button to save, and add saved posters to saved posters page
+buttonSaveThisPoster.addEventListener('click', function() {
+  saveThisPoster();
+  addSavedToGrid();
+});
+
+  // addSavedToGrid();
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
-
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
-function everChangingPoster() {
-posterImage.src = images[getRandomIndex(images)];
-posterTitle.innerText = titles[getRandomIndex(titles)];
-posterQuote.innerText = quotes[getRandomIndex(quotes)];
+//Page opens with this function call
+randomizedPoster();
+//Function to set user input as new Poster class instance
+function newPosterInstance() {
+  currentPoster = new Poster(
+    posterImage.src,
+    posterTitle.innerText,
+    posterQuote.innerText,
+  );
 };
-everChangingPoster();
-
+//Function to show a random poster
+function randomizedPoster() {
+  posterImage.src = images[getRandomIndex(images)];
+  posterTitle.innerText = titles[getRandomIndex(titles)];
+  posterQuote.innerText = quotes[getRandomIndex(quotes)];
+};
+//Page toggle functions
 function makePosterForm() {
-mainFrame.classList.toggle('hidden');
-posterForm.classList.toggle('hidden');
+  mainFrame.classList.toggle('hidden');
+  posterForm.classList.toggle('hidden');
 };
-
 function showSavedPosters() {
   postersSaved.classList.toggle('hidden');
   mainFrame.classList.toggle('hidden');
 };
-
+//Function to show user poster on main
+//Function also pushes user input to pre-loaded arrays
 function showMyPoster() {
   event.preventDefault();
   posterImage.src = createPosterImg.value;
@@ -161,4 +183,19 @@ function showMyPoster() {
   titles.push(posterTitle.innerText);
   makePosterForm();
 };
-currentPoster = new Poster(posterImage.src, posterTitle.innerText, posterQuote.innerText);
+//Function to save user poster to saved posters array
+function saveThisPoster() {
+  newPosterInstance();
+  savedPosters.push(currentPoster);
+};
+//Function to show mini poster in saved posters page
+function addSavedToGrid() {
+  for (var i = 0; i < savedPosters.length; i++) {
+    savedPostersGrid.innerHTML += `
+    <article class='mini-poster'>
+      <img class="poster-img" src=${savedPosters[i].imageURL}>
+      <h2 class="poster-title">${savedPosters[i].title}</h2>
+      <h4 class="poster-quote">${savedPosters[i].quote}</h4>
+    </article>`
+  };
+};
