@@ -161,6 +161,4 @@ function showMyPoster() {
   titles.push(posterTitle.innerText);
   makePosterForm();
 };
-// function saveMyPoster() {
-//
-// }
+currentPoster = new Poster(posterImage.src, posterTitle.innerText, posterQuote.innerText);
