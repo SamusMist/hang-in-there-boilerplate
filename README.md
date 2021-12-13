@@ -1,29 +1,30 @@
 # Hang In There - Inspirational Posters
 
 ##Contributors
+
 [Sam Mistele](https://github.com/SamusMist)
 
 [Nick Orlov](https://github.com/c-o-de)
 
 Peer reviewed by [Alex Fritz](https://github.com/alexmfritz)
 
-##Technologies
+## Technologies
 -Git/github
 -HTML
 -CSS
 -JavaScript
 
-##Overview
+## Overview
 Hang in There - An interactive Inspirational Poster generator where you can create as many of your own posters as you'd like, and save them too!
 
-##Try it Yourself!
+## Try it Yourself!
 -Fork a copy of this repository
 -Clone your copy down to your local machine
 -cd <directory-name>
 -Type <open index.html> to open the main page
 -Enjoy!
 
-##How to Navigate
+## How to Navigate
 From the main page here, you can:
   -Save current poster
   -Generate random poster
