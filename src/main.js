@@ -1,4 +1,4 @@
-// query selector variables go here 👇
+// query selector variables go here :point_down:
 var mainFrame = document.querySelector('.main-poster');
 //Variables to access poster values on main page
 var posterTitle = document.querySelector('.poster-title');
@@ -21,8 +21,7 @@ var buttonShowMyPoster = document.querySelector('.make-poster');
 var createPosterTitle = document.querySelector('#poster-title');
 var createPosterImg = document.querySelector('#poster-image-url');
 var createPosterQuote = document.querySelector('#poster-quote');
-
-// we've provided you with some data to work with 👇
+// we've provided you with some data to work with :point_down:
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -122,45 +121,44 @@ var quotes = [
 ];
 var savedPosters = [];
 var currentPoster;
-
-// event listeners go here 👇
+// event listeners go here :point_down:
 //Buttons to toggle between make poster form and main page
 buttonMakePoster.addEventListener('click', makePosterForm);
 buttonShowMain.addEventListener('click', makePosterForm);
-//Buttons to toggle between saved posters page and main page
-buttonShowSavedPoster.addEventListener('click', showSavedPosters);
+//Buttons to toggle main and saved poster page, load saved posters grid
+buttonShowSavedPoster.addEventListener('click', function () {
+  showSavedPosters();
+  addSavedToGrid();
+});
 buttonBackToMain.addEventListener('click', showSavedPosters);
 //Button to show a random poster on main when clicked
-buttonShowRandom.addEventListener('click', randomizedPoster);
+buttonShowRandom.addEventListener('click', newPosterInstance);
 //Button to show user created poster when clicked
 buttonShowMyPoster.addEventListener('click', showMyPoster);
 //Button to save, and add saved posters to saved posters page
-buttonSaveThisPoster.addEventListener('click', function() {
-  saveThisPoster();
-  addSavedToGrid();
-});
-
-  // addSavedToGrid();
-// functions and event handlers go here 👇
+buttonSaveThisPoster.addEventListener('click', saveThisPoster);
+//Event listener to open page with random poster
+window.addEventListener('load', newPosterInstance);
+// functions and event handlers go here :point_down:
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
-//Page opens with this function call
-randomizedPoster();
-//Function to set user input as new Poster class instance
+//Function to set values to new Poster class instance
 function newPosterInstance() {
+  var newPosterObject = {
+    randomImage: createPosterImg.value || images[getRandomIndex(images)],
+    randomTitle: createPosterTitle.value || titles[getRandomIndex(titles)],
+    randomQuote: createPosterQuote.value || quotes[getRandomIndex(quotes)],
+  };
   currentPoster = new Poster(
-    posterImage.src,
-    posterTitle.innerText,
-    posterQuote.innerText,
+    newPosterObject.randomImage,
+    newPosterObject.randomTitle,
+    newPosterObject.randomQuote,
   );
-};
-//Function to show a random poster
-function randomizedPoster() {
-  posterImage.src = images[getRandomIndex(images)];
-  posterTitle.innerText = titles[getRandomIndex(titles)];
-  posterQuote.innerText = quotes[getRandomIndex(quotes)];
+  posterImage.src = newPosterObject.randomImage;
+  posterTitle.innerText = newPosterObject.randomTitle;
+  posterQuote.innerText = newPosterObject.randomQuote;
 };
 //Page toggle functions
 function makePosterForm() {
@@ -171,31 +169,39 @@ function showSavedPosters() {
   postersSaved.classList.toggle('hidden');
   mainFrame.classList.toggle('hidden');
 };
-//Function to show user poster on main
+//Function to show user poster on main page
 //Function also pushes user input to pre-loaded arrays
 function showMyPoster() {
   event.preventDefault();
-  posterImage.src = createPosterImg.value;
+  newPosterInstance();
+  var createdPosterObject = {
+    userImage: createPosterImg.value,
+    userTitle: createPosterTitle.value,
+    userQuote: createPosterQuote.value,
+  };
+  posterImage.src = createdPosterObject.userImage;
+  posterTitle.innerText = createdPosterObject.userTitle;
+  posterQuote.innerText = createdPosterObject.userQuote;
   images.push(posterImage.src);
-  posterQuote.innerText = createPosterQuote.value;
-  quotes.push(posterQuote.innerText);
-  posterTitle.innerText = createPosterTitle.value;
   titles.push(posterTitle.innerText);
+  quotes.push(posterQuote.innerText);
   makePosterForm();
 };
-//Function to save user poster to saved posters array
+//Function to save user poster to saved posters array once
 function saveThisPoster() {
-  newPosterInstance();
-  savedPosters.push(currentPoster);
+  if (!savedPosters.includes(currentPoster)) {
+    savedPosters.push(currentPoster);
+  };
 };
-//Function to show mini poster in saved posters page
+//Function to show mini saved posters on saved posters grid
 function addSavedToGrid() {
+  savedPostersGrid.innerHTML = '';
   for (var i = 0; i < savedPosters.length; i++) {
     savedPostersGrid.innerHTML += `
     <article class='mini-poster'>
-      <img class="poster-img" src=${savedPosters[i].imageURL}>
-      <h2 class="poster-title">${savedPosters[i].title}</h2>
-      <h4 class="poster-quote">${savedPosters[i].quote}</h4>
+      <img src=${savedPosters[i].imageURL}>
+      <h2>${savedPosters[i].title}</h2>
+      <h4>${savedPosters[i].quote}</h4>
     </article>`
   };
 };
